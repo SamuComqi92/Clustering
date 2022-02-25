@@ -1,3 +1,6 @@
+## K-means algorithm for updating the centroid position
+#############################################################################
+
 function [y,J] = k_mean_clustering(A,MU,n_cl)
 
 [m,n] = size(A);
@@ -27,7 +30,8 @@ end;
 
 y=MU;
 
-##########################################################################
+## Function to compute the minimum cost function and chose the best centroids set
+##################################################################################
 for i=1:n_cl
      ZZ(:,i) = ((sum(([A] - MU(i,:)).^2,2)) );
 end;
