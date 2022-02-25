@@ -1,3 +1,6 @@
+## Function to assign random point form the dataset to the initial centroids
+#############################################################################
+
 function MU = rand_point(A, n_cl),
 
 m = size(A,1);
