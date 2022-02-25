@@ -7,18 +7,16 @@
 ## - The Observed disk luminosity (Log value) 
 ##        ---> It represents the amount of radiation produced by the accretion disk
 ## - The Observed luminosity ratio (Log value) 
-##        ---> It is the ratio between the luminosity of the "torus" (i.e., a structure made of gas which absorved a fraction of
+##        ---> It is the ratio between the luminosity of the "torus" (i.e., a structure made of gas which absorbed a fraction of
 ##             the accretion disk and re-emits it) and the accretion disk one.
 ##
-## The code needs as input the data file ("Dati_Astro.txt") and the number of centroids to be found.
+## The code needs an input data file ("Dati_Astro.txt") and the number of centroids to be found.
 ###############################################################################################################################################
 ###############################################################################################################################################
 
 function y=Clustering_alg_3D(A,n_cl),
 
 ## Read the file containing three columns: "Eddington ratio", "Observed disk luminosity", "Observed ratio"
-##############################################################################################################
-
 printf("\nReading the data file...\n");
 A = load('Data_Astro.txt');
 
@@ -27,11 +25,11 @@ set (findobj (gcf, "-property", "interpreter"), "interpreter", "latex");
 [m,n] = size(A);
 
 
-
 ## Randomly assign n_cl data-point from the dataset to initialize the centroids.
-## Then run K-mean algorithm. At each iteration (20), the cost function (i.e., the sum of the distance of each point
-## from the closest centroid divided by the number of data) is computed.
-## The best centroids corresponds to those with the lowest cost function.
+## Then run K-mean algorithm. At each iteration (20 in total), the cost function 
+## (i.e., the sum of the distance of each point from the closest centroid divided 
+## by the number of data) is computed. The best centroids corresponds to those with
+## the lowest cost function.
 ##############################################################################################################
 
 J_matrix = zeros(20,n_cl*size(A,2)+1);
@@ -43,15 +41,12 @@ for k=1:20,
      [MU,J] = k_mean_clustering(A,MU,n_cl);
      J_matrix(k,:) = [J,MU(:)'];
 end;
-
 printf("\n\n");
 
 [val,q] = min(J_matrix(:,1));
 MU = reshape(J_matrix(q,2:end),n_cl,size(A,2));
 
 MU
-
-
 
 ## Tridimentional plot of the dataset
 ## Different colors for different clusters
@@ -78,11 +73,4 @@ for i=1:n_cl
      view(70, 20);
 end;
 
-
 end;
-
-
-
-
-
-
