@@ -3,7 +3,8 @@
 ###############################################################################################################################################
 ## The algorithm is based on the K-mean clustering algorithm. The data file contains astrophysical data
 ## - The Eddington ratio (Log value) 
-##        ---> It represents the strength of the radiation coming from the accretion disk of gas around a black hole
+##        ---> It represents the strength of the radiation coming from the accretion disk of gas around a black hole. A small correction 
+##             (i.e. -0.8) is applied to data (it depends on the black hole rotation).
 ## - The Observed disk luminosity (Log value) 
 ##        ---> It represents the amount of radiation produced by the accretion disk
 ## - The Observed luminosity ratio (Log value) 
@@ -25,11 +26,10 @@ set (findobj (gcf, "-property", "interpreter"), "interpreter", "latex");
 [m,n] = size(A);
 
 
-## Randomly assign n_cl data-point from the dataset to initialize the centroids.
-## Then run K-mean algorithm. At each iteration (20 in total), the cost function 
-## (i.e., the sum of the distance of each point from the closest centroid divided 
-## by the number of data) is computed. The best centroids corresponds to those with
-## the lowest cost function.
+## Randomly assign n_cl data-point from the dataset to initialize the centroids then run
+## K-mean algorithm. At each iteration (20 in total), the cost function (i.e., the sum of 
+## the distance of each point from the closest centroid divided by the number of data) is 
+## computed. The best centroids corresponds to those with the lowest cost function.
 ##############################################################################################################
 
 J_matrix = zeros(20,n_cl*size(A,2)+1);
@@ -48,8 +48,7 @@ MU = reshape(J_matrix(q,2:end),n_cl,size(A,2));
 
 MU
 
-## Tridimentional plot of the dataset
-## Different colors for different clusters
+## Tridimentional plot of the dataset. Different colors are used for different clusters
 ##############################################################################################################
 
 printf("\nPlotting data and clusters...\n");
