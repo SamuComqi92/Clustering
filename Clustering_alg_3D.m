@@ -53,7 +53,7 @@ MU
 
 printf("\nPlotting data and clusters...\n");
 for i=1:n_cl
-     ZZ(:,i) = ((sum(([A] - MU(i,:)).^2,2)) );
+     ZZ(:,i) = ((sum(([A] - MU(i,:)).^2,2)) );                 #Find the centroid set with the minimum cost function
 end;
 
 [val q] = min(ZZ');
