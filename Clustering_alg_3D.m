@@ -46,7 +46,6 @@ printf("\n\n");
 [val,q] = min(J_matrix(:,1));
 MU = reshape(J_matrix(q,2:end),n_cl,size(A,2));
 
-MU
 
 ## Tridimentional plot of the dataset. Different colors are used for different clusters
 ##############################################################################################################
